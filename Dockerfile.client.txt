@@ -1,0 +1,12 @@
+# Utiliser l'image Ubuntu 22.04
+FROM ubuntu:22.04
+
+# Définir l'argument d'environnement pour éviter les invites int>ARG DEBIAN_FRONTEND=noninteractive
+
+# Installer des outils nécessaires (optionnel)
+RUN apt update && apt install -y \
+    curl \
+    vim
+
+# Garder le conteneur en cours d'exécution
+ENTRYPOINT ["tail", "-f", "/dev/null"]

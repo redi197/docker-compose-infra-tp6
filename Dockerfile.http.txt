@@ -1,0 +1,5 @@
+# Dockerfile.http
+FROM httpd:latest
+
+# Copie un fichier d'index HTML pour le serveur
+COPY ./index.html /usr/local/apache2/htdocs/index.html

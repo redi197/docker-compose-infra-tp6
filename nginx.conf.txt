@@ -1,0 +1,36 @@
+# Nombre de processus de travail
+worker_processes 1;
+
+events {
+    worker_connections 1024;  # Nombre maximum de connexions par processus de travail
+}
+
+http {
+    server {
+        listen 80;  # Écouter sur le port 80
+
+        location / {
+            proxy_pass http://http_server1:80;  # Rediriger vers http_server1
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+        }
+
+        location /server1/ {
+            proxy_pass http://http_server1:80;  # Rediriger vers http_server1
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+        }
+
+        location /server2/ {
+            proxy_pass http://http_server2:80;  # Rediriger vers http_server2
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+        }
+    }
+}

@@ -1,0 +1,5 @@
+# Dockerfile.bdd
+FROM mysql:latest
+
+# Copier des scripts SQL pour initialiser la base de données (si nécessaire)
+COPY ./init.sql /docker-entrypoint-initdb.d/  # S'exécute lors de la première exécution du conteneur
